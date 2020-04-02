@@ -3,15 +3,38 @@ package sprint02;
 public class DivideTwoIntegers {
     public static void main(String[] args) {
 
-        System.out.println(divide(-2147483648, -1));
+        System.out.println(divide(-2147483648, 2));
     }
 
     public static int divide(int dividend, int divisor) {
-        long temp = divisor;
-       if((long) dividend /temp > Integer.MAX_VALUE){
-           return Integer.MAX_VALUE;
-       }
+        long divid;
+        if (dividend == Integer.MIN_VALUE) {
+            divid = Integer.MAX_VALUE + 1L;
+        } else {
+            divid = Math.abs(dividend);
+        }
 
-        return dividend/divisor;
+        long divis = Math.abs(divisor);
+
+        int count = 0;
+
+
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;
+        }
+
+
+        while (divid >= divis) {
+            divid = divid - divis;
+            count++;
+        }
+
+        if ((dividend > 0 && divisor > 0) || (dividend < 0 && divisor < 0))
+            return count;
+
+
+        return -count;
+
     }
 }
+
